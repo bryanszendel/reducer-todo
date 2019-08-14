@@ -1,11 +1,8 @@
-import React, {useReducer, useState} from 'react';
+import React, { useState } from 'react';
 
-import {todoReducer, initialState} from '../reducers/todoReducer'
-
-const TodoForm = () => {
+const TodoForm = ({addTodo}) => {
   
   const [newItem, setNewItem] = useState()
-  const [state, dispatch] = useReducer(todoReducer, initialState)
 
   const handleChanges = e => {
     setNewItem(
@@ -13,13 +10,13 @@ const TodoForm = () => {
     );
   };
 
-  const submitItem = e => {
+  const handleSubmit = e => {
     e.preventDefault()
-    dispatch({ type: "ADD_ITEM", payload: newItem });
+    addTodo(newItem)
   }
   
   return (
-    <form onSubmit={submitItem}>
+    <form onSubmit={handleSubmit}>
       <input 
         type="text" 
         value={newItem}
@@ -27,10 +24,9 @@ const TodoForm = () => {
         onChange={handleChanges}
         placeholder="Enter Task"
       />
-      <button>
+      <button type="submit">
         Add Task
       </button>
-      {console.log(newItem, state)}
     </form>
   )
 }
