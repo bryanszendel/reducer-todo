@@ -17,6 +17,7 @@ export const initialState = {
 
 export const todoReducer = (state, action) => {
   switch (action.type) {
+    
     case "ADD_ITEM":
       const addItem = {
         item: action.payload,
@@ -27,7 +28,27 @@ export const todoReducer = (state, action) => {
         ...state, 
         todos: [...state.todos, addItem]
       }
-
+    
+      case "TOGGLE_COMPLETED":
+      return {
+        ...state,
+        todos: state.todos.map(item => {
+          if (item.id === action.payload) {
+            return {
+              ...item,
+              completed: !item.completed
+            }
+          } else {
+            return item
+          }
+        })
+      }
+    
+      case "CLEAR_COMP":
+        return {
+          ...state,
+          todos: state.todos.filter(item => !item.completed)
+        }
     default:
       return state;
   }
