@@ -10,7 +10,10 @@ const TodoList = () => {
       {console.log('TODOS', state.todos)}
       {state.todos.map(item => {
           return (
-            <div key={item.id} onClick={() => dispatch({ type: "TOGGLE_COMPLETED", payload: item.id })}>
+            <div 
+              key={item.id} 
+              onClick={() => dispatch({ type: "TOGGLE_COMPLETED", payload: item.id })}
+              className={`item${item.completed ? ' completed' : ''}`}>
               <p>{item.item}</p>
               {console.log(item)}
             </div>

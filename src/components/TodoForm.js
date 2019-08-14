@@ -12,9 +12,14 @@ const TodoForm = () => {
        e.target.value
     );
   };
+
+  const submitItem = e => {
+    e.preventDefault()
+    dispatch({ type: "ADD_ITEM", payload: newItem });
+  }
   
   return (
-    <div>
+    <form onSubmit={submitItem}>
       <input 
         type="text" 
         value={newItem}
@@ -22,15 +27,11 @@ const TodoForm = () => {
         onChange={handleChanges}
         placeholder="Enter Task"
       />
-      <button 
-        onClick={() => {
-          dispatch({ type: "ADD_ITEM", payload: newItem });
-        }}
-        >
-          Add Task
+      <button>
+        Add Task
       </button>
       {console.log(newItem, state)}
-    </div>
+    </form>
   )
 }
 
